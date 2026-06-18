@@ -1,0 +1,126 @@
+/* src/styles/bento.css */
+
+/* 1. Basis Kleuren & Typografie (Dark Mode) */
+:root {
+  --bg-color: #0f172a;      /* Diep donkerblauw/zwart voor de achtergrond */
+  --card-bg: #1e293b;       /* Iets lichtere kleur voor de Bento tiles */
+  --border-color: #334155;  /* Subtiele randkleur */
+  --text-color: #f8fafc;    /* Witte/lichtgrijze tekst */
+  --primary-color: #60a5fa; /* Mooie blauwe accentkleur (pas gerust aan!) */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  padding: 2rem; /* Geeft het grid wat ademruimte vanaf de randen van het scherm */
+}
+
+/* 2. Het Bento Grid Systeem */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile first: alles onder elkaar */
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 3. Basis styling voor elke losse Tile */
+.bento-tile {
+  position: relative;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect: tegel licht op en komt iets naar voren */
+.bento-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-color);
+}
+
+/* 4. Desktop Layout (De asymmetrische 'krant' look) */
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr); /* Verdeel het scherm in 4 gelijke kolommen */
+    grid-auto-rows: minmax(200px, auto); /* Elke rij is minimaal 200px hoog */
+  }
+
+  /* Utility classes om tegels over meerdere kolommen of rijen te trekken */
+  .col-span-2 { grid-column: span 2; }
+  .col-span-3 { grid-column: span 3; }
+  .col-span-4 { grid-column: span 4; }
+  
+  .row-span-2 { grid-row: span 2; }
+  .row-span-3 { grid-row: span 3; }
+}
+
+/* =========================================================================
+   GEDEELDE BENTO STIJLEN (Voor Home, Werk & Blog)
+   ========================================================================= */
+
+/* De "Terug" knop (komt voor in werk en blog) */
+.back-link { 
+  display: inline-block; 
+  margin-bottom: 0.5rem; 
+  text-decoration: none; 
+  font-weight: 600; 
+  color: var(--primary-color); 
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover { 
+  transform: translateX(-5px); 
+}
+
+/* De algemene Intro/Header Tegel (komt voor in home, werk en blog) */
+.intro-tile {
+  background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+  border: none;
+  box-shadow: inset 0 0 0 1px var(--border-color);
+  /* De home-pagina gebruikt flex-end, werk/blog gebruiken center. We zetten de basis hier: */
+  display: flex;
+  flex-direction: column;
+}
+
+/* De tekst-styling binnen de intro-tegel */
+.intro-tile h1 {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+  color: var(--text-color);
+  position: relative;
+  z-index: 2;
+}
+
+.intro-tile p { 
+  font-size: 1.05rem; 
+  opacity: 0.8; 
+  margin: 0; 
+  position: relative;
+  z-index: 2;
+}
+
+/* De content wrapper (vooral belangrijk voor home i.v.m. de blobs) */
+.content-wrapper { 
+  position: relative; 
+  z-index: 2; 
+}

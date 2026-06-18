@@ -1,0 +1,22 @@
+---
+// src/layouts/MainLayout.astro
+import '../styles/bento.css';
+import { ClientRouter } from 'astro:transitions';
+
+const { title } = Astro.props;
+---
+
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | Jeppe de Wilde</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

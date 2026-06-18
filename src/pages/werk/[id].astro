@@ -1,0 +1,109 @@
+---
+// src/pages/werk/[id].astro
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// 1. Vertel Astro welke pagina's gegenereerd moeten worden op basis van de MD-bestanden
+export async function getStaticPaths() {
+  const projecten = await getCollection('werk');
+  return projecten.map(project => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<MainLayout title={project.data.title}>
+  <article class="project-detail">
+    
+    <header class="project-hero">
+      {project.data.cover && (
+        <Image 
+          src={project.data.cover} 
+          alt={project.data.alt_tekst || project.data.title} 
+          class="hero-bg"
+          transition:name={`cover-${project.id}`}
+        />
+      )}
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <a href="/werk" class="back-btn">&larr; Terug naar Werk</a>
+        <h1 transition:name={`title-${project.id}`}>{project.data.title}</h1>
+        {project.data.omschrijving && <p class="lead">{project.data.omschrijving}</p>}
+      </div>
+    </header>
+
+    <section class="project-body">
+      <Content />
+    </section>
+
+  </article>
+</MainLayout>
+
+<style>
+  .project-detail {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+
+  .project-hero {
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 3rem 2rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, var(--card-bg) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 2;
+  }
+
+  .hero-content { position: relative; z-index: 3; width: 100%; }
+  
+  .back-btn {
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin: 0 0 0.5rem 0; color: #fff; line-height: 1.1; }
+  .hero-content .lead { font-size: 1.2rem; color: #cbd5e1; margin: 0; }
+
+  /* Styling voor de ingeladen markdown content */
+  .project-body {
+    padding: 3rem 2rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  
+  /* Zorgt dat headers in je markdown er ook direct netjes uitzien */
+  .project-body :global(h2) { color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.8rem; }
+  .project-body :global(p) { margin-bottom: 1.5rem; opacity: 0.9; }
+  .project-body :global(ul) { margin-left: 1.5rem; margin-bottom: 1.5rem; }
+</style>

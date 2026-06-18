@@ -1,0 +1,140 @@
+---
+// src/pages/leerdoelen.astro
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Mijn Leerdoelen">
+  <div class="header-section" transition:name="bento-leerdoelen">
+    <a href="/" class="back-link">&larr; Terug naar Home</a>
+    <h1>Focus voor de Meesterproef</h1>
+    <p class="intro">Tijdens de meesterproef werk ik gericht aan deze drie persoonlijke en technische leerdoelen om mijzelf klaar te stomen voor de arbeidsmarkt.</p>
+  </div>
+
+  <div class="doelen-container">
+    
+    <article class="doel-card">
+      <span class="bg-number">01</span>
+      <div class="card-content">
+        <h2>Componenten & Dynamische Layouts</h2>
+        <p class="samenvatting">Creatieve vrijheid door slimme structuur en het vermijden van spaghetti-code.</p>
+        
+        <h3>Hoe pak ik dit aan?</h3>
+        <ul>
+          <li><strong>Lego voor gevorderden:</strong> Ik bouw de interface op uit losse, herbruikbare blokken.</li>
+          <li><strong>Spelen met CSS Grid:</strong> Ik dwing mijzelf om asymmetrische, out-of-the-box vlakverdelingen te maken met CSS Subgrid.</li>
+          <li><strong>Timeboxing:</strong> Loopt een layout uit de hand? Parkeren. Eerst de basis, dan finetunen.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="doel-card">
+      <span class="bg-number">02</span>
+      <div class="card-content">
+        <h2>Toegankelijkheid by Default</h2>
+        <p class="samenvatting">Geen afterthought meer, maar vanaf dag één ontwerpen en bouwen voor iedereen.</p>
+        
+        <h3>Hoe pak ik dit aan?</h3>
+        <ul>
+          <li><strong>Native HTML eerst:</strong> Elk formulier en elke knop moet standaard robuust zijn voordat ik CSS/JS toevoeg.</li>
+          <li><strong>Testen tijdens het bouwen:</strong> Nieuw component klaar? Muis wegleggen en testen met de 'Tab' toets.</li>
+          <li><strong>Screenreader checks:</strong> VoiceOver gebruiken om te garanderen dat de logica zonder zicht ook klopt.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="doel-card">
+      <span class="bg-number">03</span>
+      <div class="card-content">
+        <h2>Team & Leiderschap</h2>
+        <p class="samenvatting">Mijn inzet (150%) overbrengen op het team, in plaats van in m'n eentje de kar te trekken.</p>
+        
+        <h3>Hoe pak ik dit aan?</h3>
+        <ul>
+          <li><strong>Delegeren en loslaten:</strong> Oefenen met taken uit handen geven en vertrouwen op groepsgenoten.</li>
+          <li><strong>Positieve motivatie:</strong> In plaats van werk overnemen, het gesprek aangaan: "Hoe kan ik je helpen sneller te gaan?"</li>
+          <li><strong>Verwachtingen uitspreken:</strong> Bij de start afspraken maken over kwaliteit en inzet.</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</MainLayout>
+
+<style>
+  .header-section {
+    margin-bottom: 2rem;
+    padding: 3rem 2rem;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .back-link { 
+    display: inline-block; 
+    margin-bottom: 1.5rem; 
+    text-decoration: none; 
+    font-weight: 600; 
+    color: var(--primary-color); 
+  }
+
+  .header-section h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; color: var(--text-color); line-height: 1.2; }
+  .intro { font-size: 1.2rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+  /* Grid voor de doelen (3 naast elkaar op desktop, 1 op mobile) */
+  .doelen-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .doelen-container { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .doel-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .doel-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+  }
+
+  /* Het gigantische, subtiele cijfer in de achtergrond */
+  .bg-number {
+    position: absolute;
+    bottom: -20px;
+    right: 0px;
+    font-size: 10rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text-color);
+    opacity: 0.03;
+    z-index: 0;
+    user-select: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .doel-card:hover .bg-number {
+    opacity: 0.06;
+    transform: scale(1.05);
+  }
+
+  .card-content { position: relative; z-index: 2; }
+  
+  .card-content h2 { color: var(--primary-color); font-size: 1.6rem; margin: 0 0 0.5rem 0; line-height: 1.3; }
+  .samenvatting { font-size: 1.1rem; opacity: 0.9; margin: 0 0 2rem 0; font-weight: 500; }
+  
+  .card-content h3 { font-size: 1.1rem; color: var(--text-color); margin: 0 0 1rem 0; }
+  
+  .card-content ul { padding-left: 1.2rem; margin: 0; opacity: 0.85; line-height: 1.6; }
+  .card-content li { margin-bottom: 0.75rem; }
+  .card-content li strong { color: var(--text-color); }
+</style>
