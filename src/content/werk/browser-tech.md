@@ -1,13 +1,14 @@
 ---
-title: "Browser Tech: Formulier"
+title: "Browser Tech"
 omschrijving: "Een belastingformulier in de huisstijl van de NS."
 datum: 2026-04-09
 cover: "../../assets/bt-cover.png"
-alt_tekst: "Screenshot van het NS belastingformulier"
+alt_tekst: "Erfbelastingformulier in NS styling"
+live_url: "https://jeppedewilde.github.io/browsertech/"
+vak: "Browser Tech"
+docent: "Victor Zumpolle"
+cijfer: "8,3"
 ---
-## Link
-https://jeppedewilde.github.io/browsertech/
-
 Voor dit vak moest ik een belastingformulier bouwen in de huisstijl van de NS. Een belangrijke term tijdens dit vak was *progressive enhancement*; beginnen met de absolute basis (HTML) en de code steeds verder uitbreiden met CSS en later JavaScript.
 
 ## Nieuwe Inzichten

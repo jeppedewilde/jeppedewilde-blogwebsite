@@ -28,7 +28,7 @@ const getBlogBentoClass = (post, index) => {
         <div class="content-wrapper">
           <a href="/" class="back-link">&larr; Terug naar Home</a>
           <h1>Blogs & Reflecties</h1>
-          <p>Mijn wekelijkse inzichten, gastcolleges en diepgaande reflecties tijdens de minor.</p>
+          <p>Blogposts over gastsprekers, conferenties, bezoeken aan bureaus en mijn reflecties.</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ const getBlogBentoClass = (post, index) => {
         >
           <span class="type-label">{post.data.type.replace('-', ' ')}</span>
           <div class="blog-content">
-            <h2>{post.data.title}</h2>
+            <h2 transition:name={`blog-titel-${post.id}`}>{post.data.title}</h2>
             {post.data.omschrijving && <p class="omschrijving">{post.data.omschrijving}</p>}
           </div>
           <time>{post.data.datum.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
@@ -51,21 +51,19 @@ const getBlogBentoClass = (post, index) => {
 </MainLayout>
 
 <style>
-  /* =========================================================================
-     DE SCROLLBARE WRAPPER
-     ========================================================================= */
+  /* MARK: layout, grid 
+  */
   .blog-page-wrapper {
-    min-height: 100dvh; /* Minimaal zo hoog als het scherm, maar mag groter groeien */
+    min-height: 100dvh; 
     width: 100vw;
     margin-left: calc(50% - 50vw); 
-    padding: 3rem 1.5rem; /* Lekker veel ademruimte aan de boven- en onderkant */
+    padding: 3rem 1.5rem; 
   }
 
   .blog-grid {
     width: 100%;
     max-width: 1200px;
-    grid-auto-flow: dense; /* Vult eventuele gaten automatisch op */
-    /* DIT IS DE MAGIE: Elke rij is minimaal 180px hoog, maar schaalt mee met de tekst */
+    grid-auto-flow: dense; 
     grid-auto-rows: minmax(180px, auto); 
   }
 
@@ -75,25 +73,39 @@ const getBlogBentoClass = (post, index) => {
     }
   }
 
-/* =========================================================================
-     1. UITLEG TEGEL (Uniek voor Blog)
-     ========================================================================= */
-  .intro-tile { justify-content: center; padding: 1.5rem 2rem; }
-  .intro-tile h1 { font-size: clamp(2rem, 3vw, 2.5rem); }
+  /* MARK: intro tile 
+  */
+  .intro-tile { 
+    justify-content: center; 
+    padding: 1.5rem 2rem;
+    background: var(--card-bg-2);
+    transition: background 0.3s ease;
+  }
 
-  /* =========================================================================
-     2. BLOG TEGELS
-     ========================================================================= */
+  .intro-tile h1 { 
+    font-size: clamp(2rem, 3vw, 2.5rem); 
+  }
+
+  /* MARK: blog tiles 
+  */
   .blog-tile {
     justify-content: flex-start;
     padding: 1.75rem;
   }
 
+  .blog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* MARK: labels 
+  */
   .type-label { 
     display: inline-block; 
     padding: 0.25rem 0.6rem; 
     background: var(--border-color); 
-    color: var(--primary-color); 
+    color: var(--accent-3); 
     border-radius: 8px; 
     font-size: 0.8rem; 
     width: fit-content;
@@ -103,18 +115,21 @@ const getBlogBentoClass = (post, index) => {
     letter-spacing: 0.03em;
   }
 
-  /* Geef reflecties een extra herkenbaar tintje */
   .reflectie-tile .type-label {
-    background: rgba(96, 165, 250, 0.15);
-    color: var(--primary-color);
+    background: var(--badge-bg);
+    color: var(--accent-1);
   }
 
-  .blog-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .reflectie-tile {
+    background-color: var(--card-bg-3);
   }
 
+  .nerd-hoog-tile {
+    background: linear-gradient(to bottom, var(--card-bg), var(--blog-gradient-end));
+  }
+
+  /* MARK: typografie 
+  */
   .blog-tile h2 { 
     font-size: 1.3rem; 
     margin: 0; 
@@ -123,14 +138,15 @@ const getBlogBentoClass = (post, index) => {
     line-height: 1.3;
   }
   
-  .blog-tile:hover h2 { color: var(--primary-color); }
+  .blog-tile:hover h2 { 
+    color: var(--primary-color); 
+  }
   
   .blog-tile .omschrijving { 
     margin: 0; 
-    color: #cbd5e1; 
+    color: var(--text-color); 
     font-size: 0.95rem; 
     opacity: 0.85;
-    /* Netjes afkappen op maximaal 3 regels als de omschrijving te lang is */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -140,12 +156,7 @@ const getBlogBentoClass = (post, index) => {
   .blog-tile time { 
     opacity: 0.5; 
     font-size: 0.85rem; 
-    margin-top: auto; /* Drukt de datum altijd netjes naar de bodem van de tegel */
+    margin-top: auto; 
     padding-top: 1.5rem; 
-  }
-
-  /* Extra diepte voor de hogere tegels */
-  .nerd-hoog-tile {
-    background: linear-gradient(to bottom, var(--card-bg), #131c2e);
   }
 </style>

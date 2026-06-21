@@ -11,6 +11,10 @@ const werkCollectie = defineCollection({
     datum: z.date().optional(),
     cover: image().optional(), 
     alt_tekst: z.string().optional(),
+    live_url: z.string().optional(),
+    vak: z.string().optional(),
+    docent: z.string().optional(),
+    cijfer: z.string().optional(),
   }),
 });
 

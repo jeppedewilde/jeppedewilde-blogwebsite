@@ -1,13 +1,14 @@
 ---
-title: "API: The One With The Quiz"
-omschrijving: "Een real-time multiplayer Friends quiz."
+title: "API"
+omschrijving: "Een real-time multiplayer quiz over de serie Friends."
 datum: 2026-06-04
 cover: "../../assets/api-cover.png"
-alt_tekst: "Screenshot van The One With The Quiz applicatie"
+alt_tekst: "The One With The Quiz, een quiz applicatie"
+live_url: "https://the-one-with-the-quiz.onrender.com/"
+vak: "API"
+docent: "Cyd Stumpel"
+cijfer: "8,5"
 ---
-## Link
-https://the-one-with-the-quiz.onrender.com/
-
 Dit was een vrij ambitieus project: het bouwen van een eigen multiplayer applicatie. Geen simpele website met een beetje tekst, maar een live, real-time quiz gebaseerd op mijn favoriete serie: Friends. De quiz heet (natuurlijk) *The One With The Quiz*. 
 
 ## Nieuwe Inzichten

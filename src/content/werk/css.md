@@ -1,13 +1,14 @@
 ---
-title: "CSS: Interactieve Speelkaart"
+title: "CSS"
 omschrijving: "Een puur CSS control panel zonder classes of ID's."
 datum: 2026-04-30
 cover: "../../assets/css-cover.png"
-alt_tekst: "Screenshot van de interactieve speelkaart"
+alt_tekst: "Interactieve speelkaart"
+live_url: "https://jeppedewilde.github.io/control-panel/"
+vak: "CSS"
+docent: "Nils Binder"
+cijfer: "8,0"
 ---
-## Link
-https://jeppedewilde.github.io/control-panel/
-
 Dit was zonder twijfel het meest uitdagende CSS-project dat ik tot nu toe heb gedaan. Ik maakte voor dit vak een interactief control panel, zonder JavaScript, waarmee ik een digitale speelkaart kon manipuleren.
 
 ## Nieuwe Inzichten

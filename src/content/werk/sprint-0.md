@@ -1,13 +1,14 @@
 ---
-title: "Sprint 0: Persoonlijke Website"
-omschrijving: "De eerste website van de minor"
+title: "Sprint 0"
+omschrijving: "De eerste website van de minor, een nulmeting"
 datum: 2026-02-12
 cover: "../../assets/sprint0-cover.png"
-alt_tekst: "Screenshot van mijn Sprint 0 website"
+alt_tekst: "Persoonlijke website van Jeppe de Wilde"
+live_url: "https://jeppedewilde.github.io/ikbenjeppe/"
+vak: "Sprint 0"
+docent: "Sanne 't Hoofd"
+cijfer: "Voldaan"
 ---
-## Link
-https://jeppedewilde.github.io/ikbenjeppe/
-
 ## Mijn nieuwe inzichten
 Ik heb tijdens sprint 0 gemerkt dat het best even inkomen is om na maanden niks doen weer te gaan coderen, maar dat je coderen niet zomaar verleert en dat het gaandeweg vanzelf terugkomt. Ik ben er ook achter gekomen dat het voor mijn doorzettingsvermogen erg belangrijk is dat ik een duidelijk doel heb en dat je je soms verkijkt op wat wel of niet lastig is. Zo had ik bijvoorbeeld verwacht dat het inladen van gegevens via een API heel lastig zou zijn en dat CSS animaties een eitje zouden zijn, maar het omgekeerde bleek waar te zijn. 
 

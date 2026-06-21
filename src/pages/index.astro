@@ -1,5 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import jeppeSelfie from '../assets/jeppe-selfie.png';
 ---
 
 <MainLayout title="Home">
@@ -9,23 +11,23 @@ import MainLayout from '../layouts/MainLayout.astro';
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
       <div class="content-wrapper">
-        <h1>Jeppe de Wilde</h1>
+        <h1 id="hero-naam">Jeppe de Wilde</h1>
         <p>Something about me?</p>
       </div>
     </div>
 
-    <a href="/werk" class="bento-tile col-span-2 tile-link accent-bg" transition:name="bento-werk">
+    <a href="/werk" class="bento-tile col-span-2 tile-link accent-bg" aria-label="Bekijk mijn werk" transition:name="bento-werk">
       <div class="tile-content">
         <h2>Mijn Werk</h2>
-        <p>Bekijk de projecten van deze minor</p>
+        <p>De projecten van deze minor</p>
       </div>
       <span class="arrow">&rarr;</span>
     </a>
 
-    <a href="/blog" class="bento-tile col-span-1 tile-link" transition:name="bento-blog">
+    <a href="/blog" class="bento-tile col-span-1 tile-link" aria-label="Bekijk mijn blogs" transition:name="bento-blog">
       <div class="tile-content">
         <h2>Blogs</h2>
-        <p>Weekly Nerds</p>
+        <p>Weekly Nerds & Reflecties</p>
       </div>
       <span class="arrow">&rarr;</span>
     </a>
@@ -33,24 +35,28 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="bento-tile col-span-1 nav-tile">
       <h3>Menu</h3>
       <ul>
-        <li><a href="/">Home</a></li>
         <li><a href="/werk">Mijn Werk</a></li>
         <li><a href="/blog">Blogs</a></li>
+        <li><a href="/leerdoelen">Leerdoelen</a></li>
       </ul>
     </div>
 
-    <a href="/leerdoelen" class="bento-tile col-span-4 tile-link" transition:name="bento-leerdoelen">
+    <a href="/leerdoelen" class="bento-tile col-span-3 tile-link" aria-label="Bekijk mijn leerdoelen" transition:name="bento-leerdoelen">
       <div class="tile-content">
-        <h2>Focus voor de Meesterproef</h2>
+        <h2>Leerdoelen: mijn focus voor de meesterproef</h2>
         <p>Componenten, Toegankelijkheid & Leiderschap</p>
       </div>
       <span class="arrow">&rarr;</span>
     </a>
 
+    <div class="bento-tile col-span-1 selfie-tile">
+      <Image src={jeppeSelfie} alt="Jongeman met kort bruin haar kijkt in de camera terwijl hij een selfie maakt in de wc van een vliegtuig. Hij knipoogt en steeks zijn tong uit." class="selfie-img" />
+    </div>
+
     <div class="bento-tile col-span-4 marquee-tile">
       <div class="marquee-content">
-        <span class="ticker-text">HTML5 • CSS Grid & Subgrid • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven •</span>
-        <span class="ticker-text">HTML5 • CSS Grid & Subgrid • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven •</span>
+        <span class="ticker-text">HTML5 • CSS • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
+        <span class="ticker-text">HTML5 • CSS • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
       </div>
     </div>
 
@@ -58,39 +64,43 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
-  /* =========================================================================
-     LOCK SCROLLING (Alleen op desktop!)
-     We gebruiken :global() zodat we de tags in de MainLayout kunnen bereiken
-     ========================================================================= */
+  /* MARK: lock scrolling (desktop) 
+  */
   @media (min-width: 768px) {
     :global(body) {
       height: 100vh;
-      overflow: hidden; /* Blokkeert het scrollen volledig */
+      overflow: hidden;
     }
     
     :global(main) {
       height: 100vh;
       display: flex;
-      align-items: center; /* Centreert het grid perfect in het midden van je scherm */
+      align-items: center;
       padding: 1.5rem;
     }
 
-    /* We dwingen de home-grid om precies 100% van de hoogte te vullen */
     .home-grid {
       height: 100%;
-      max-height: 900px; /* Zorgt dat tegels niet belachelijk ver uitrekken op enorme schermen */
-      /* We maken 4 rijen: 3 even grote (1fr) en de marquee mag iets smaller (80px) */
+      max-height: 900px;
       grid-template-rows: repeat(3, 1fr) 80px; 
-      grid-auto-rows: unset; /* Heft de standaard bento.css regels op */
+      grid-auto-rows: unset;
     }
   }
 
-/* =========================================================================
-     1. INTRO TILE (Uniek voor Homepage)
-     ========================================================================= */
-  .intro-tile { justify-content: flex-end; }
-  .intro-tile h1 { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.03em; }
-  .content-wrapper p { max-width: 90%; }
+  /* MARK: intro tile
+  */
+  .intro-tile { 
+    justify-content: flex-end; 
+  }
+  
+  .intro-tile h1 { 
+    font-size: clamp(2rem, 4vw, 3.5rem); 
+    letter-spacing: -0.03em; 
+  }
+  
+  .content-wrapper p { 
+    max-width: 90%; 
+  }
 
   .blob {
     position: absolute;
@@ -98,15 +108,51 @@ import MainLayout from '../layouts/MainLayout.astro';
     filter: blur(60px);
     z-index: 1;
     opacity: 0.25;
-    animation: zweven 12s infinite alternate ease-in-out;
+    animation: zweven 10s infinite alternate ease-in-out;
   }
-  .blob-1 { width: 300px; height: 300px; background-color: var(--primary-color); top: -80px; left: -80px; }
-  .blob-2 { width: 200px; height: 200px; background-color: #ec4899; bottom: -50px; right: -50px; animation-delay: -5s; }
-  @keyframes zweven { 100% { transform: translate(40px, 40px) scale(1.1); } }
+  
+  .blob-1 { 
+    width: 300px; 
+    height: 300px; 
+    background-color: var(--primary-color); 
+    top: -80px; 
+    left: -80px; 
+  }
+  
+  .blob-2 { 
+    width: 200px; 
+    height: 200px; 
+    background-color: var(--blob-accent); 
+    bottom: -50px; 
+    right: -50px; 
+    animation-delay: -5s; 
+  }
+  
+  @keyframes zweven { 
+    100% { 
+      transform: translate(40px, 40px) scale(1.1); 
+    } 
+  }
 
-  /* =========================================================================
-     2. LINK TILES
-     ========================================================================= */
+  .blob {
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+  }
+
+  .intro-tile:hover .blob {
+    opacity: 0.6;
+    animation-duration: 4s;
+  }
+
+  .intro-tile:hover .blob-1 {
+    background-color: var(--accent-1);
+  }
+
+  .intro-tile:hover .blob-2 {
+    background-color: var(--accent-3);
+  }
+
+  /* MARK: link tiles
+  */
   .tile-link {
     display: flex;
     flex-direction: row;
@@ -115,36 +161,93 @@ import MainLayout from '../layouts/MainLayout.astro';
     transition: all 0.3s ease;
   }
 
-  .tile-content { display: flex; flex-direction: column; }
+  .tile-content { 
+    display: flex; 
+    flex-direction: column; 
+  }
   
-  .tile-link h2 { color: var(--text-color); margin: 0 0 0.25rem 0; font-size: 1.6rem; transition: color 0.3s ease; }
-  .tile-link p { opacity: 0.7; margin: 0; font-size: 1.05rem; }
+  .tile-link h2 { 
+    color: var(--text-color); 
+    margin: 0 0 0.25rem 0; 
+    font-size: 1.6rem; 
+    transition: color 0.3s ease; 
+  }
+  
+  .tile-link p { 
+    opacity: 0.7; 
+    margin: 0; 
+    font-size: 1.05rem; 
+  }
 
-  .arrow { font-size: 1.5rem; color: var(--primary-color); transition: transform 0.3s ease; opacity: 0; transform: translateX(-10px); }
+  .arrow { 
+    font-size: 1.5rem; 
+    color: var(--primary-color); 
+    transition: transform 0.3s ease; 
+    opacity: 0; 
+    transform: translateX(-10px); 
+  }
 
-  .tile-link:hover { background-color: #233045; }
-  .tile-link:hover h2 { color: var(--primary-color); }
-  .tile-link:hover .arrow { opacity: 1; transform: translateX(0); }
+  .tile-link:hover { 
+    background-color: var(--tile-hover-bg); 
+  }
+  
+  .tile-link:hover h2 { 
+    color: var(--accent-2); 
+  }
+  
+  .tile-link:hover .arrow { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
 
-  /* =========================================================================
-     3. NAVIGATIE TILE
-     ========================================================================= */
-  .nav-tile { justify-content: center; background-color: transparent; }
-  .nav-tile h3 { margin: 0 0 1rem 0; color: var(--primary-color); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
-  .nav-tile ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-  .nav-tile a { color: var(--text-color); text-decoration: none; opacity: 0.6; transition: opacity 0.2s, padding-left 0.2s; font-weight: 500; font-size: 1.1rem; }
-  .nav-tile a:hover { opacity: 1; color: var(--primary-color); padding-left: 5px; }
+  /* MARK: nav tile
+  */
+  .nav-tile { 
+    justify-content: center; 
+    background-color: transparent; 
+  }
+  
+  .nav-tile h3 { 
+    margin: 0 0 1rem 0; 
+    color: var(--primary-color); 
+    font-size: 1.2rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em; 
+    opacity: 0.8; 
+  }
+  
+  .nav-tile ul { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.5rem; 
+  }
+  
+  .nav-tile a { 
+    color: var(--text-color); 
+    text-decoration: none; 
+    opacity: 0.6; 
+    transition: opacity 0.2s, padding-left 0.2s; 
+    font-weight: 500; 
+    font-size: 1.1rem; 
+  }
+  
+  .nav-tile a:hover { 
+    opacity: 1; 
+    color: var(--accent-2); 
+    padding-left: 5px; 
+  }
 
-/* =========================================================================
-     4. MARQUEE TILE
-     ========================================================================= */
+  /* MARK: marquee tile
+  */
   .marquee-tile { 
     display: flex; 
     align-items: center; 
-    padding: 1.5rem 0; /* Padding aan de zijkant weggehaald zodat hij van rand tot rand loopt */
+    padding: 1.5rem 0;
     background-color: var(--primary-color); 
     border: none; 
-    /* justify-content: center; is hier bewust WEGGEHAALD! */
   }
 
   .marquee-content { 
@@ -156,14 +259,141 @@ import MainLayout from '../layouts/MainLayout.astro';
   .ticker-text { 
     font-family: monospace; 
     font-weight: bold; 
-    color: #0f172a; 
+    color: var(--marquee-text); 
     padding-right: 1.5rem; 
     font-size: 1.2rem; 
     text-transform: uppercase; 
   }
 
   @keyframes scroll-ticker { 
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } 
+    0% { 
+      transform: translateX(0); 
+    }
+    100% { 
+      transform: translateX(-50%); 
+    } 
+  }
+
+  /* MARK: selfie tile
+  */
+  .selfie-tile {
+    padding: 0; 
+    overflow: hidden;
+    display: flex;
+  }
+
+  .selfie-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.1); 
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+
+  .selfie-tile:hover .selfie-img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1);
+  }
+
+  /* MARK: reduced motion
+  */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+      animation-play-state: paused; 
+    }
+  }
+
+  /* MARK: easter egg thema
+  */
+  
+  :global(body), :global(.bento-tile), :global(.marquee-tile) {
+    transition: background-color 1.5s ease, background 1.5s ease, color 1.5s ease, border-color 1.5s ease;
+  }
+
+  :global(body.theme-blob-party) {
+    --bg-color: var(--accent-3); 
+    
+    --card-bg: var(--accent-1);
+    --card-bg-2: #ED5A43;
+    --card-bg-3: #C43D28;
+    --tile-hover-bg: #F4654F;
+    
+    --text-color: #FFFFFF;
+    --border-color: rgba(255, 255, 255, 0.2);
+    --primary-color: var(--accent-1); 
+    
+    --intro-bg-start: #8A3ECA;
+    --intro-bg-end: var(--accent-3);
+    --marquee-text: #fff;
+  }
+
+  .intro-tile.is-ready {
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(224, 77, 54, 0.5);
   }
 </style>
+
+<script>
+  // @ts-nocheck
+  let splitNaam;
+  let hoverTimer;
+
+  document.addEventListener('astro:page-load', () => {
+    const gsap = window.gsap;
+    const SplitText = window.SplitText;
+
+    if (!gsap || !SplitText) return;
+
+    gsap.registerPlugin(SplitText);
+
+    const introTile = document.querySelector('.intro-tile');
+    const heroNaam = document.getElementById('hero-naam');
+
+    // Alleen uitvoeren als we écht op de homepagina zijn
+    if (introTile && heroNaam) {
+      
+      // Veiligheidscheck: Was de tekst nog opgesplitst door een vorige sessie? Herstel het dan eerst!
+      if (splitNaam) { splitNaam.revert(); }
+      
+      splitNaam = new SplitText(heroNaam, { type: "chars" });
+      let isClickable = false;
+
+      introTile.addEventListener('mouseenter', () => {
+        
+        // De SplitText animatie
+        gsap.fromTo(splitNaam.chars, 
+          { y: -30, opacity: 0, scale: 1.5, rotateX: -90, color: "var(--accent-2)" },
+          { y: 0, opacity: 1, scale: 1, rotateX: 0, color: "var(--text-color)", stagger: 0.04, duration: 0.6, ease: "back.out(2)", overwrite: "auto" }
+        );
+
+        // De 3-seconden timer
+        hoverTimer = setTimeout(() => {
+          isClickable = true;
+          introTile.classList.add('is-ready');
+          gsap.to(introTile, { scale: 1.02, duration: 0.15, yoyo: true, repeat: 1 });
+        }, 3000);
+      });
+
+      introTile.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
+        isClickable = false;
+        introTile.classList.remove('is-ready');
+      });
+
+      introTile.addEventListener('click', () => {
+        if (isClickable) {
+          document.body.classList.toggle('theme-blob-party');
+        }
+      });
+    }
+  });
+
+  document.addEventListener('astro:before-swap', () => {
+    clearTimeout(hoverTimer);
+    if (splitNaam) { 
+      splitNaam.revert(); 
+      splitNaam = null; 
+    }
+  });
+</script>
+

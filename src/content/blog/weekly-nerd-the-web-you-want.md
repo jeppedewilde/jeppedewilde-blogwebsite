@@ -1,5 +1,5 @@
 ---
-title: "The Web You Want (Special Session)"
+title: "The Web You Want (1)"
 type: "weekly-nerd"
 datum: 2026-04-17
 ---

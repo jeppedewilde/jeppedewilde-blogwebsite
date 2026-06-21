@@ -1,13 +1,14 @@
 ---
-title: "Hackathon: Nebula Xplorer"
-omschrijving: "In 4 dagen een out-of-the-box website gebouwd voor de Nebula Xplorer met een team."
+title: "Hackathon"
+omschrijving: "In 4 dagen een out-of-the-box website gebouwd voor de Nebula Xplorer."
 datum: 2026-03-26
 cover: "../../assets/hackathon-cover.png"
-alt_tekst: "Screenshot van de Nebula Xplorer website"
+alt_tekst: "Website voor de Nebula Xplorer"
+live_url: "https://ayabarni.github.io/hackatoon-SRON/"
+vak: "Hackathon"
+docent: "n.v.t."
+cijfer: "Voldaan"
 ---
-## Link
-https://ayabarni.github.io/hackatoon-SRON/
-
 Tijdens de hackathon hebben we in een team van 4 mensen in 4 dagen een website gemaakt voor de Nebula Xplorer. Het doel was om een zo gaaf mogelijke website te maken en iets wat je normaal gesproken niet snel tegenkomt op het web.
 
 ## Mijn inbreng

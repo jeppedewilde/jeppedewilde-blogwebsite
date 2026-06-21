@@ -1,41 +1,155 @@
-/* src/styles/bento.css */
-
-/* 1. Basis Kleuren & Typografie (Dark Mode) */
+  /* MARK: light mode 
+  */
 :root {
-  --bg-color: #0f172a;      /* Diep donkerblauw/zwart voor de achtergrond */
-  --card-bg: #1e293b;       /* Iets lichtere kleur voor de Bento tiles */
-  --border-color: #334155;  /* Subtiele randkleur */
-  --text-color: #f8fafc;    /* Witte/lichtgrijze tekst */
-  --primary-color: #60a5fa; /* Mooie blauwe accentkleur (pas gerust aan!) */
+  --bg-color: #F4F1EA;       
+  --card-bg: #E1DAC7;
+  --card-bg-2: #EBE5D5;
+  --card-bg-3: #D0C6AD;        
+  --border-color: #D3CBB4;   
+  --text-color: #1A1918;     
+  --primary-color: #5C5A4F;  
+
+  --accent-1: #E04D36;       
+  --accent-2: #1D4ED8;       
+  --accent-3: #9D4EDD;       
+
+  --intro-bg-start: #E1DAC7;
+  --intro-bg-end: #D6CEB8;
+  --tile-hover-bg: #E8E2D2;  
+  --marquee-text: #E1DAC7;   
+  --blob-accent: #8A8575;    
+  --overlay-bg: rgba(26, 25, 24, 0.85); 
+  --badge-bg: rgba(92, 90, 79, 0.15);  
+  --blog-gradient-end: #D3CBB4;
+  --text-on-image: #F4F1EA;  
 }
 
-*, *::before, *::after {
+  /* MARK: dark mode 
+  */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0D0C0B;       
+    --card-bg: #22201D;
+    --card-bg-2: #2A2824;
+    --card-bg-3: #161513;      
+    --border-color: #33302B;   
+    --text-color: #E1DAC7;     
+    --primary-color: #9E9A88;  
+
+    --accent-1: #FF6B57;       
+    --accent-2: #4A7AFF;       
+    --accent-3: #B366FF;       
+
+    --intro-bg-start: #22201D; 
+    --intro-bg-end: #171513;   
+    --tile-hover-bg: #2C2A25;  
+    --marquee-text: #0D0C0B;   
+    --blob-accent: #5C5A4F;    
+    --overlay-bg: rgba(13, 12, 11, 0.95); 
+    --badge-bg: rgba(225, 218, 199, 0.1); 
+    --blog-gradient-end: #171513;
+    --text-on-image: #E1DAC7;
+  }
+}
+
+  /* MARK: algemeen 
+  */
+*, 
+*::before, 
+*::after {
   box-sizing: border-box;
 }
 
+::selection {
+  background-color: var(--primary-color);
+  color: var(--bg-color); 
+}
+
+::-moz-selection {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+  /* MARK: typografie & body 
+  */
 body {
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em; 
+}
+
+.ticker-text {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+  /* MARK: hoofd layout & bento grid basis 
+  */
 main {
-  padding: 2rem; /* Geeft het grid wat ademruimte vanaf de randen van het scherm */
+  padding: 2rem; 
 }
 
-/* 2. Het Bento Grid Systeem */
 .bento-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile first: alles onder elkaar */
+  grid-template-columns: 1fr; 
   gap: 1.5rem;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* 3. Basis styling voor elke losse Tile */
+  /* MARK: bento grid 
+  */
+
+@media (min-width: 500px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .col-span-2, 
+  .col-span-3, 
+  .col-span-4 { 
+    grid-column: span 2; 
+  }
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr); 
+  }
+  
+  .col-span-2 { 
+    grid-column: span 2; 
+  }
+
+  .col-span-3 { 
+    grid-column: span 3; 
+  }
+
+  .col-span-4 { 
+    grid-column: span 4; 
+  }
+  
+  .row-span-2 { 
+    grid-row: span 2; 
+  }
+
+  .row-span-3 { 
+    grid-row: span 3; 
+  }
+}
+
+  /* MARK: standaard bento tile
+  */
 .bento-tile {
   position: relative;
   background-color: var(--card-bg);
@@ -50,34 +164,15 @@ main {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Hover effect: tegel licht op en komt iets naar voren */
 .bento-tile:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border-color: var(--primary-color);
 }
 
-/* 4. Desktop Layout (De asymmetrische 'krant' look) */
-@media (min-width: 768px) {
-  .bento-grid {
-    grid-template-columns: repeat(4, 1fr); /* Verdeel het scherm in 4 gelijke kolommen */
-    grid-auto-rows: minmax(200px, auto); /* Elke rij is minimaal 200px hoog */
-  }
-
-  /* Utility classes om tegels over meerdere kolommen of rijen te trekken */
-  .col-span-2 { grid-column: span 2; }
-  .col-span-3 { grid-column: span 3; }
-  .col-span-4 { grid-column: span 4; }
-  
-  .row-span-2 { grid-row: span 2; }
-  .row-span-3 { grid-row: span 3; }
-}
-
 /* =========================================================================
-   GEDEELDE BENTO STIJLEN (Voor Home, Werk & Blog)
+   8. GEDEELDE COMPONENTEN (Navigatie, Intro, Wrappers)
    ========================================================================= */
-
-/* De "Terug" knop (komt voor in werk en blog) */
 .back-link { 
   display: inline-block; 
   margin-bottom: 0.5rem; 
@@ -89,20 +184,18 @@ main {
 }
 
 .back-link:hover { 
-  transform: translateX(-5px); 
+  transform: translateX(-5px);
+  color: var(--accent-2);
 }
 
-/* De algemene Intro/Header Tegel (komt voor in home, werk en blog) */
 .intro-tile {
-  background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(145deg, var(--intro-bg-start) 0%, var(--intro-bg-end) 100%);
   border: none;
   box-shadow: inset 0 0 0 1px var(--border-color);
-  /* De home-pagina gebruikt flex-end, werk/blog gebruiken center. We zetten de basis hier: */
   display: flex;
   flex-direction: column;
 }
 
-/* De tekst-styling binnen de intro-tegel */
 .intro-tile h1 {
   margin: 0 0 0.5rem 0;
   line-height: 1.1;
@@ -119,8 +212,36 @@ main {
   z-index: 2;
 }
 
-/* De content wrapper (vooral belangrijk voor home i.v.m. de blobs) */
 .content-wrapper { 
   position: relative; 
   z-index: 2; 
+}
+
+/* =========================================================================
+   9. LEES PROGRESSIE BALK
+   ========================================================================= */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px; 
+  background-color: var(--primary-color); 
+  width: 0%; 
+  z-index: 9999;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* =========================================================================
+   10. ACCESSIBILITY: KEYBOARD FOCUS
+   ========================================================================= */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px; 
+  border-radius: 8px; 
+  transition: outline-offset 0.2s ease;
 }

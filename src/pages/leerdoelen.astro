@@ -4,10 +4,10 @@ import MainLayout from '../layouts/MainLayout.astro';
 ---
 
 <MainLayout title="Mijn Leerdoelen">
-  <div class="header-section" transition:name="bento-leerdoelen">
+  <div class="header-section intro-tile" transition:name="bento-leerdoelen">
     <a href="/" class="back-link">&larr; Terug naar Home</a>
-    <h1>Focus voor de Meesterproef</h1>
-    <p class="intro">Tijdens de meesterproef werk ik gericht aan deze drie persoonlijke en technische leerdoelen om mijzelf klaar te stomen voor de arbeidsmarkt.</p>
+    <h1>Mijn leerdoelen tijdens de meesterproef</h1>
+    <p class="intro">Tijdens de meesterproef werk ik gericht aan deze drie persoonlijke en technische leerdoelen. In mijn 3e en laatste reflectie (te vinden op de blog pagina) reflecteer ik op hoe ik aan mijn leerdoelen gewerkt heb.</p>
   </div>
 
   <div class="doelen-container">
@@ -61,10 +61,11 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <style>
+  /* MARK: header & introductie 
+  */
   .header-section {
     margin-bottom: 2rem;
     padding: 3rem 2rem;
-    background: var(--card-bg);
     border-radius: 24px;
     border: 1px solid var(--border-color);
     text-align: center;
@@ -78,26 +79,84 @@ import MainLayout from '../layouts/MainLayout.astro';
     color: var(--primary-color); 
   }
 
-  .header-section h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; color: var(--text-color); line-height: 1.2; }
-  .intro { font-size: 1.2rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+  .back-link:hover {
+    color: var(--accent-2);
+  }
 
-  /* Grid voor de doelen (3 naast elkaar op desktop, 1 op mobile) */
+  .intro-tile {
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    background: var(--card-bg-2);
+    transition: background 0.3s ease;
+  }
+
+  .header-section h1 { 
+    font-size: clamp(2rem, 5vw, 3rem); 
+    margin: 0 0 1rem 0; 
+    color: var(--text-color); 
+    line-height: 1.2; 
+  }
+
+  .intro { 
+    font-size: 1.2rem; 
+    opacity: 0.8; 
+    max-width: 700px; 
+    margin: 0 auto; 
+    line-height: 1.6; 
+  }
+
+  /* MARK: doelen grid 
+  */
   .doelen-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
+  /* MARK: lock scrolling (desktop)
+  */
   @media (min-width: 1024px) {
-    .doelen-container { grid-template-columns: repeat(3, 1fr); }
+    :global(body) {
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    :global(main) {
+      height: 100vh;
+      display: flex;
+      flex-direction: column; 
+      justify-content: center; 
+      padding: 1.5rem; 
+    }
+
+    .header-section {
+      flex-shrink: 0; 
+      margin-bottom: 1.5rem;
+    }
+
+    .doelen-container { 
+      grid-template-columns: repeat(3, 1fr); 
+      flex-grow: 1; 
+      min-height: 0; 
+      gap: 1.5rem;
+    }
+
+    .doel-card {
+      height: 100%; 
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; 
+    }
   }
 
+  /* MARK: doel cards 
+  */
   .doel-card {
     position: relative;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 24px;
-    padding: 2.5rem;
+    padding: 1rem;
     overflow: hidden;
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
@@ -107,7 +166,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     border-color: var(--primary-color);
   }
 
-  /* Het gigantische, subtiele cijfer in de achtergrond */
+  /* achtergrond cijfers */
   .bg-number {
     position: absolute;
     bottom: -20px;
@@ -127,14 +186,44 @@ import MainLayout from '../layouts/MainLayout.astro';
     transform: scale(1.05);
   }
 
-  .card-content { position: relative; z-index: 2; }
+  /* card content */
+  .card-content { 
+    position: relative; 
+    z-index: 2; 
+  }
   
-  .card-content h2 { color: var(--primary-color); font-size: 1.6rem; margin: 0 0 0.5rem 0; line-height: 1.3; }
-  .samenvatting { font-size: 1.1rem; opacity: 0.9; margin: 0 0 2rem 0; font-weight: 500; }
+  .card-content h2 { 
+    color: var(--primary-color); 
+    font-size: 1.6rem; 
+    margin: 0 0 0.5rem 0; 
+    line-height: 1.3; 
+  }
   
-  .card-content h3 { font-size: 1.1rem; color: var(--text-color); margin: 0 0 1rem 0; }
+  .samenvatting { 
+    font-size: 1.1rem; 
+    opacity: 0.9; 
+    margin: 0 0 2rem 0; 
+    font-weight: 500; 
+  }
   
-  .card-content ul { padding-left: 1.2rem; margin: 0; opacity: 0.85; line-height: 1.6; }
-  .card-content li { margin-bottom: 0.75rem; }
-  .card-content li strong { color: var(--text-color); }
+  .card-content h3 { 
+    font-size: 1.1rem; 
+    color: var(--text-color); 
+    margin: 0 0 1rem 0; 
+  }
+  
+  .card-content ul { 
+    padding-left: 1.2rem; 
+    margin: 0; 
+    opacity: 0.85; 
+    line-height: 1.6; 
+  }
+  
+  .card-content li { 
+    margin-bottom: 0.75rem; 
+  }
+  
+  .card-content li strong { 
+    color: var(--text-color); 
+  }
 </style>

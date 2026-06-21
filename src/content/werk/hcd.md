@@ -1,13 +1,14 @@
 ---
-title: "Human Centred Design: Roger's Focus Reader"
+title: "Human Centred Design"
 omschrijving: "Een website ontworpen voor één persoon."
 datum: 2026-05-14
 cover: "../../assets/hcd-cover.png"
-alt_tekst: "Screenshot van Roger's Focus Reader"
+alt_tekst: "Roger's Focus Reader"
+live_url: "https://jeppedewilde.github.io/hcd/"
+vak: "Human Centred Design"
+docent: "Vasilis van Gemert"
+cijfer: "9,0"
 ---
-## Link
-https://jeppedewilde.github.io/hcd/
-
 De opdracht van dit vak was om te ontwerpen voor 1 persoon. Volgens de Exclusive Design principes bouwde ik een applicatie speciaal voor Roger, een filosofiestudent met maculadegeneratie die afhankelijk is van een screenreader. Het resultaat was Roger's Focus Reader: een op maat gemaakte web-app om filosofische teksten te lezen en annoteren.
 
 ## Nieuwe Inzichten
