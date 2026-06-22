@@ -3,16 +3,19 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 
+// alle markdown bestanden ophalen uit blog content collection
 const alleBlogs = await getCollection('blog');
+
+// sorteer de lijst met blogs op datum (nieuwste bovenaan)
 const sortedBlogs = alleBlogs.sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
 
-// Functie die de grootte bepaalt op basis van het type blog
+// functie die de grootte bepaalt op basis van het type blog
 const getBlogBentoClass = (post, index) => {
-  // Reflecties vallen extra op door 2 kolommen in beslag te nemen (breed)
+  // reflecties 2 kolommen breed
   if (post.data.type === 'reflectie') {
     return 'col-span-2 row-span-1 reflectie-tile';
   }
-  // Om de zoveel Weekly Nerds maken we er eentje hoger voor visuele variatie in het grid
+  // om de zoveel Weekly Nerds maken we er eentje hoger voor visuele variatie in het grid
   if (index % 4 === 0) {
     return 'col-span-1 row-span-2 nerd-hoog-tile';
   }

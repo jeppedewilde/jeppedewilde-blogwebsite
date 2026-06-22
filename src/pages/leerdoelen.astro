@@ -16,14 +16,16 @@ import MainLayout from '../layouts/MainLayout.astro';
       <span class="bg-number">01</span>
       <div class="card-content">
         <h2>Componenten & Dynamische Layouts</h2>
-        <p class="samenvatting">Creatieve vrijheid door slimme structuur en het vermijden van spaghetti-code.</p>
+        <p class="samenvatting">Creatieve vrijheid door slimme structuur en herbruikbare componenten.</p>
         
         <h3>Hoe pak ik dit aan?</h3>
         <ul>
-          <li><strong>Lego voor gevorderden:</strong> Ik bouw de interface op uit losse, herbruikbare blokken.</li>
+          <li><strong>Componenten:</strong> Ik bouw de interface op uit losse, herbruikbare blokken.</li>
           <li><strong>Spelen met CSS Grid:</strong> Ik dwing mijzelf om asymmetrische, out-of-the-box vlakverdelingen te maken met CSS Subgrid.</li>
-          <li><strong>Timeboxing:</strong> Loopt een layout uit de hand? Parkeren. Eerst de basis, dan finetunen.</li>
         </ul>
+
+        <h3>Waarom?</h3>
+        <p>Ik ben al die basic websites wel een beetje zat en wil dingen maken die anders zijn.</p>
       </div>
     </article>
 
@@ -31,14 +33,16 @@ import MainLayout from '../layouts/MainLayout.astro';
       <span class="bg-number">02</span>
       <div class="card-content">
         <h2>Toegankelijkheid by Default</h2>
-        <p class="samenvatting">Geen afterthought meer, maar vanaf dag één ontwerpen en bouwen voor iedereen.</p>
+        <p class="samenvatting">Vanaf dag 1 rekening houden met toegankelijkheid bouwen voor iedereen.</p>
         
         <h3>Hoe pak ik dit aan?</h3>
         <ul>
-          <li><strong>Native HTML eerst:</strong> Elk formulier en elke knop moet standaard robuust zijn voordat ik CSS/JS toevoeg.</li>
-          <li><strong>Testen tijdens het bouwen:</strong> Nieuw component klaar? Muis wegleggen en testen met de 'Tab' toets.</li>
-          <li><strong>Screenreader checks:</strong> VoiceOver gebruiken om te garanderen dat de logica zonder zicht ook klopt.</li>
+          <li><strong>Native HTML eerst:</strong> Eerst robuuste HTML voordat ik CSS en JS ga toevoegen.</li>
+          <li><strong>Testen tijdens het bouwen:</strong> Tijdens het bouwen zonder muis testen (keyboard controls) en ook VoiceOver testen.</li>
         </ul>
+
+        <h3>Waarom?</h3>
+        <p>Er wordt veel nadruk gelegd (door docenten en professionals uit het werkveld) hoe belangrijk toegankelijkheid is, en ik wil mezelf graag aanleren daar standaard meer rekening mee te houden.</p>
       </div>
     </article>
 
@@ -46,14 +50,17 @@ import MainLayout from '../layouts/MainLayout.astro';
       <span class="bg-number">03</span>
       <div class="card-content">
         <h2>Team & Leiderschap</h2>
-        <p class="samenvatting">Mijn inzet (150%) overbrengen op het team, in plaats van in m'n eentje de kar te trekken.</p>
+        <p class="samenvatting">Voorkomen dat ik tijdens groepswerk het overzicht verlies, stress krijg en daardoor maar zoveel mogelijk zelf ga doen.</p>
         
         <h3>Hoe pak ik dit aan?</h3>
         <ul>
           <li><strong>Delegeren en loslaten:</strong> Oefenen met taken uit handen geven en vertrouwen op groepsgenoten.</li>
-          <li><strong>Positieve motivatie:</strong> In plaats van werk overnemen, het gesprek aangaan: "Hoe kan ik je helpen sneller te gaan?"</li>
+          <li><strong>Overzicht bewaren:</strong> Zorgen dat ik het overzicht altijd bewaar, dan bewaar ik ook mijn rust en logisch verstand.</li>
           <li><strong>Verwachtingen uitspreken:</strong> Bij de start afspraken maken over kwaliteit en inzet.</li>
         </ul>
+
+        <h3>Waarom?</h3>
+        <p>Elk project komt er een punt dat ik bang ben dat het niet goed komt tenzij ik alles oplos, ik vertrouw mijn team dan niet en leg mezelf ook nog een veel te veel druk en stress op.</p>
       </div>
     </article>
 
@@ -113,16 +120,12 @@ import MainLayout from '../layouts/MainLayout.astro';
     gap: 1.5rem;
   }
 
-  /* MARK: lock scrolling (desktop)
+  /* MARK: scrolling
   */
   @media (min-width: 1024px) {
-    :global(body) {
-      height: 100vh;
-      overflow: hidden;
-    }
-    
+
     :global(main) {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column; 
       justify-content: center; 
@@ -137,7 +140,6 @@ import MainLayout from '../layouts/MainLayout.astro';
     .doelen-container { 
       grid-template-columns: repeat(3, 1fr); 
       flex-grow: 1; 
-      min-height: 0; 
       gap: 1.5rem;
     }
 
@@ -145,7 +147,6 @@ import MainLayout from '../layouts/MainLayout.astro';
       height: 100%; 
       display: flex;
       flex-direction: column;
-      overflow-y: auto; 
     }
   }
 

@@ -3,15 +3,26 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection, render } from 'astro:content';
 
+// check welke pagina's gegenereerd moeten worden op basis van de MD/MDX-bestanden
+// getStaticPaths is een verplichte ingebouwde functie van Astro voor dynamische routes
 export async function getStaticPaths() {
+
+    // haal alle projecten op uit de werk content collectie
   const blogs = await getCollection('blog');
+
+    // loop (map) door de lijst met projecten
   return blogs.map(post => ({
+    // bepaal URL van de pagina (/werk/naam-blog)
     params: { id: post.id },
+
+    // stuur data van project naar de pagina
     props: { post },
   }));
 }
-
+// pak de project data
 const { post } = Astro.props;
+
+// zet inhoud .md file naar html -> render geeft component 'content' (html element <Content />)
 const { Content } = await render(post);
 ---
 
@@ -127,24 +138,36 @@ const { Content } = await render(post);
   }
 </style>
 
-
 <script>
-  // Omdat we Astro View Transitions gebruiken, luisteren we naar 'astro:page-load'
+  // omdat we view transitions gebruiken astro:page-load
   document.addEventListener('astro:page-load', () => {
     const progressBar = document.getElementById('lees-balk');
     
-    // Als we niet op een blogpagina zijn, doe dan niks
+    // stop als balk niet bestaat
     if (!progressBar) return;
 
-    // Bereken hoeveel procent er is gescrold
-    window.addEventListener('scroll', () => {
+    // rekenlogica
+    const updateProgressBar = () => {
+      // hoeveel pixels vanaf bovenkant pagina
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      
+      // totale scrollbare ruimte
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       
       if (height > 0) {
+        // bereken percentage
         const scrolled = (winScroll / height) * 100;
+        // Pas de breedte van het balkje aan
         progressBar.style.width = scrolled + "%";
       }
-    });
+    };
+
+    // luister naar scrollen gebruiker
+    window.addEventListener('scroll', updateProgressBar);
+
+    // ruim scroll listener op bij verlaten pagina
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', updateProgressBar);
+    }, { once: true });
   });
 </script>

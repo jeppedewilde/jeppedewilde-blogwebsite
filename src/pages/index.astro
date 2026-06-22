@@ -55,8 +55,8 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
 
     <div class="bento-tile col-span-4 marquee-tile">
       <div class="marquee-content">
-        <span class="ticker-text">HTML5 • CSS • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
-        <span class="ticker-text">HTML5 • CSS • Astro • View Transitions • Accessibility (WCAG) • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
+        <span class="ticker-text">HTML • CSS • Javascript • Astro • View Transitions • Accessibility (WCAG) • VoiceOver • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
+        <span class="ticker-text" aria-hidden="true">HTML • CSS • Javascript • Astro • View Transitions • Accessibility (WCAG) • VoiceOver • WebSockets • Component-Driven • GSAP • MVC Pattern • Progressive Enhancement • Grid & Subgrid • SplitText • API • JSON • Teamwork •</span>
       </div>
     </div>
 
@@ -346,10 +346,12 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
   let splitNaam;
   let hoverTimer;
 
+  // gebruik 'astro:page-load' in plaats van DOMContentLoaded, zodat het script ook runt bij client-side navigatie in Astro
   document.addEventListener('astro:page-load', () => {
     const gsap = window.gsap;
     const SplitText = window.SplitText;
 
+    // stop als libraries nog niet geladen zijn
     if (!gsap || !SplitText) return;
 
     gsap.registerPlugin(SplitText);
@@ -357,18 +359,21 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
     const introTile = document.querySelector('.intro-tile');
     const heroNaam = document.getElementById('hero-naam');
 
-    // Alleen uitvoeren als we écht op de homepagina zijn
+    // alleen als beide elementen bestaan
     if (introTile && heroNaam) {
       
-      // Veiligheidscheck: Was de tekst nog opgesplitst door een vorige sessie? Herstel het dan eerst!
+      // was tekst al gesplitst? undo
       if (splitNaam) { splitNaam.revert(); }
       
+      // splitsen in karakters
       splitNaam = new SplitText(heroNaam, { type: "chars" });
+      
+      // is clickable standaard false, mag niet geklikt worden
       let isClickable = false;
 
       introTile.addEventListener('mouseenter', () => {
         
-        // De SplitText animatie
+        // GSAP Splittext animatie
         gsap.fromTo(splitNaam.chars, 
           { 
             y: -30, 
@@ -390,10 +395,12 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
           }
         );
 
-        // De 3-seconden timer
+        // timer, na 3sec hover clickable
         hoverTimer = setTimeout(() => {
           isClickable = true;
           introTile.classList.add('is-ready');
+          
+          // bounce animatie laat zien dat er geklikt kan worden
           gsap.to(introTile, { scale: 1.02, duration: 0.15, yoyo: true, repeat: 1 });
         }, 3000);
       });
@@ -412,7 +419,9 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
     }
   });
 
+  // 'astro:before-swap' triggert net voordat Astro de oude pagina weghaalt en de nieuwe inlaadt
   document.addEventListener('astro:before-swap', () => {
+    // ruimt actieve timers en GSAP/SplitText instanties op. 
     clearTimeout(hoverTimer);
     if (splitNaam) { 
       splitNaam.revert(); 
@@ -420,4 +429,3 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
     }
   });
 </script>
-

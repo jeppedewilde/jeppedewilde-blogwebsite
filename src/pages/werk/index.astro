@@ -6,12 +6,16 @@ import { Image } from "astro:assets";
 
 const alleProjecten = await getCollection("werk");
 
-// Zorg dat de Meesterproef ALTIJD als eerste in de array staat (zodat hij rechtsboven landt)
+// zoek meesterproef in alle projecten
 const meesterproef = alleProjecten.find(p => p.id === 'meesterproef');
+
+// Verzamel alle andere projecten in een nieuwe lijst
 const overigeProjecten = alleProjecten.filter(p => p.id !== 'meesterproef');
+
+// zet meesterproef op 1 (zodat deze rechtsboven in het grid komt) en plak de rest erachteraan
 const projecten = [meesterproef, ...overigeProjecten].filter(Boolean);
 
-// Slimme functie om tegels perfect als een Tetris-puzzel in een 4x4 grid te laten passen
+// tegels in grid laten passen
 const getBentoClass = (index) => {
   if (index === 0) return "col-span-2 row-span-2";
   if (index === 1) return "col-span-2 row-span-1";
@@ -180,7 +184,7 @@ const getBentoClass = (index) => {
   
   .content h2 {
     margin: 0 0 0.25rem 0;
-    color: var(--intro-bg-end);
+    color: var(--text-on-image);
     font-size: 1.15rem; 
     line-height: 1.3;
     transition: color 0.3s ease;
