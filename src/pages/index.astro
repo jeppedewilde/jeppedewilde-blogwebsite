@@ -305,7 +305,6 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
 
   /* MARK: easter egg thema
   */
-  
   :global(body), :global(.bento-tile), :global(.marquee-tile) {
     transition: background-color 1.5s ease, background 1.5s ease, color 1.5s ease, border-color 1.5s ease;
   }
@@ -317,6 +316,7 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
     --card-bg-2: #ED5A43;
     --card-bg-3: #C43D28;
     --tile-hover-bg: #F4654F;
+    --accent-2: #fff;
     
     --text-color: #FFFFFF;
     --border-color: rgba(255, 255, 255, 0.2);
@@ -325,6 +325,14 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
     --intro-bg-start: #8A3ECA;
     --intro-bg-end: var(--accent-3);
     --marquee-text: #fff;
+  }
+
+  :global(body.theme-blob-party.bento-tile) {
+    border: 1px solid white;
+  }
+  :global(body.theme-blob-party .bento-tile):hover {
+    box-shadow: 0 0 30px rgba(224, 77, 54, 0.5);
+    border: 1px solid var(--accent-1);
   }
 
   .intro-tile.is-ready {
@@ -362,8 +370,24 @@ import jeppeSelfie from '../assets/jeppe-selfie.png';
         
         // De SplitText animatie
         gsap.fromTo(splitNaam.chars, 
-          { y: -30, opacity: 0, scale: 1.5, rotateX: -90, color: "var(--accent-2)" },
-          { y: 0, opacity: 1, scale: 1, rotateX: 0, color: "var(--text-color)", stagger: 0.04, duration: 0.6, ease: "back.out(2)", overwrite: "auto" }
+          { 
+            y: -30, 
+            opacity: 0, 
+            scale: 1.5, 
+            rotateX: -90, 
+            color: "var(--accent-2)" 
+          },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1, 
+            rotateX: 0, 
+            color: "var(--text-color)", 
+            stagger: 0.04, 
+            duration: 0.6, 
+            ease: "back.out(2)", 
+            overwrite: "auto" 
+          }
         );
 
         // De 3-seconden timer
